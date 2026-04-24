@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  RefreshDisplay
+//  PixelPulse
 //
 //  Created by Neill Shazly on 2026-03-23.
 //

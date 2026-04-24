@@ -1,13 +1,13 @@
 //
-//  RefreshDisplayUITests.swift
-//  RefreshDisplayUITests
+//  PixelPulseUITests.swift
+//  PixelPulseUITests
 //
 //  Created by Neill Shazly on 2026-03-23.
 //
 
 import XCTest
 
-final class RefreshDisplayUITests: XCTestCase {
+final class PixelPulseUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
