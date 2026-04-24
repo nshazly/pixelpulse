@@ -24,6 +24,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D26ECFC52F9B412D0007D4E5 /* generate_icon_concept2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generate_icon_concept2.swift; sourceTree = "<group>"; };
+		D26ECFC62F9B413F0007D4E5 /* generate_icon_concept3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generate_icon_concept3.swift; sourceTree = "<group>"; };
 		D295AA272F71E0AE00B1B4B7 /* RefreshDisplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RefreshDisplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D295AA342F71E0AF00B1B4B7 /* RefreshDisplayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RefreshDisplayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D295AA3E2F71E0AF00B1B4B7 /* RefreshDisplayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RefreshDisplayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +74,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D26ECFC32F9B41090007D4E5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D26ECFC42F9B410B0007D4E5 /* Concept3Icons */,
+				D26ECFC52F9B412D0007D4E5 /* generate_icon_concept2.swift */,
+				D26ECFC62F9B413F0007D4E5 /* generate_icon_concept3.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D26ECFC42F9B410B0007D4E5 /* Concept3Icons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Concept3Icons;
+			sourceTree = "<group>";
+		};
 		D295AA1E2F71E0AE00B1B4B7 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +98,7 @@
 				D295AA372F71E0AF00B1B4B7 /* RefreshDisplayTests */,
 				D295AA412F71E0AF00B1B4B7 /* RefreshDisplayUITests */,
 				D295AA282F71E0AE00B1B4B7 /* Products */,
+				D26ECFC32F9B41090007D4E5 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
