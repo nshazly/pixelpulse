@@ -15,17 +15,26 @@ struct ContentView: View {
             headerSection
             Divider()
             infoSection
+            targetSection
             actionSection
             Divider()
             logSection
         }
-        .frame(width: 460, height: 500)
+        .frame(width: 460, height: 580)
         .onAppear {
             manager.refreshDisplayList()
             manager.updateCurrentModeDescription()
         }
         .onChange(of: manager.selectedDisplayID) {
+            manager.reloadModes()
             manager.updateCurrentModeDescription()
+        }
+        .onChange(of: manager.selectedResolution) {
+            if let rates = Optional(manager.availableRefreshRates),
+               let current = manager.selectedRefreshRate,
+               !rates.contains(current) {
+                manager.selectedRefreshRate = rates.first
+            }
         }
     }
 
@@ -37,7 +46,7 @@ struct ContentView: View {
                 .font(.system(size: 36))
                 .foregroundStyle(.tint)
             VStack(alignment: .leading, spacing: 2) {
-                Text("RefreshDisplay")
+                Text("PixelPulse")
                     .font(.title2.bold())
                 Text("Fix Samsung Odyssey G9 refresh rate sync")
                     .font(.subheadline)
@@ -51,53 +60,94 @@ struct ContentView: View {
     // MARK: - Info
 
     private var infoSection: some View {
-        VStack(spacing: 12) {
-            GroupBox {
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("Display")
-                            .fontWeight(.medium)
-                        Spacer()
-                        Picker("", selection: $manager.selectedDisplayID) {
-                            ForEach(manager.displays) { display in
-                                Text(display.name).tag(display.id)
-                            }
+        GroupBox {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("Display")
+                        .fontWeight(.medium)
+                    Spacer()
+                    Picker("", selection: $manager.selectedDisplayID) {
+                        ForEach(manager.displays) { display in
+                            Text(display.name).tag(display.id)
                         }
-                        .labelsHidden()
-                        .frame(maxWidth: 220)
                     }
+                    .labelsHidden()
+                    .frame(maxWidth: 220)
+                }
 
-                    HStack {
-                        Text("Current Mode")
-                            .fontWeight(.medium)
-                        Spacer()
-                        Text(manager.currentModeDescription)
-                            .foregroundStyle(.secondary)
-                            .monospacedDigit()
-                    }
+                HStack {
+                    Text("Current Mode")
+                        .fontWeight(.medium)
+                    Spacer()
+                    Text(manager.currentModeDescription)
+                        .foregroundStyle(.secondary)
+                        .monospacedDigit()
+                }
 
-                    HStack {
-                        Text("Status")
-                            .fontWeight(.medium)
-                        Spacer()
-                        HStack(spacing: 6) {
-                            if manager.status == .switching {
-                                ProgressView()
-                                    .controlSize(.small)
-                            }
-                            Circle()
-                                .fill(manager.status.color)
-                                .frame(width: 8, height: 8)
-                            Text(manager.status.label)
-                                .foregroundStyle(manager.status.color)
+                HStack {
+                    Text("Status")
+                        .fontWeight(.medium)
+                    Spacer()
+                    HStack(spacing: 6) {
+                        if manager.status == .switching {
+                            ProgressView()
+                                .controlSize(.small)
                         }
+                        Circle()
+                            .fill(manager.status.color)
+                            .frame(width: 8, height: 8)
+                        Text(manager.status.label)
+                            .foregroundStyle(manager.status.color)
                     }
                 }
-                .padding(.vertical, 4)
             }
+            .padding(.vertical, 4)
         }
         .padding(.horizontal)
         .padding(.top, 12)
+    }
+
+    // MARK: - Target Mode Selection
+
+    private var targetSection: some View {
+        GroupBox("Switch via") {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("Resolution")
+                        .fontWeight(.medium)
+                    Spacer()
+                    Picker("", selection: $manager.selectedResolution) {
+                        ForEach(manager.availableResolutions, id: \.self) { res in
+                            Text(res.label).tag(Optional(res))
+                        }
+                    }
+                    .labelsHidden()
+                    .frame(maxWidth: 180)
+                }
+
+                HStack {
+                    Text("Refresh Rate")
+                        .fontWeight(.medium)
+                    Spacer()
+                    Picker("", selection: $manager.selectedRefreshRate) {
+                        ForEach(manager.availableRefreshRates, id: \.self) { rate in
+                            Text(String(format: "%.0f Hz", rate)).tag(Optional(rate))
+                        }
+                    }
+                    .labelsHidden()
+                    .frame(maxWidth: 180)
+                }
+
+                if let target = manager.selectedTargetMode {
+                    Text("Will switch to \(target.label), wait 2s, then restore.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding(.vertical, 4)
+        }
+        .padding(.horizontal)
+        .padding(.top, 8)
     }
 
     // MARK: - Action
@@ -109,7 +159,7 @@ struct ContentView: View {
         }
         .controlSize(.large)
         .keyboardShortcut("r", modifiers: .command)
-        .disabled(manager.status == .switching)
+        .disabled(manager.status == .switching || manager.selectedTargetMode == nil)
         .padding(.horizontal)
         .padding(.vertical, 12)
     }

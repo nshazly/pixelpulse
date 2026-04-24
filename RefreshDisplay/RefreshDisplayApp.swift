@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct RefreshDisplayApp: App {
+struct PixelPulseApp: App {
     @State private var manager = DisplayRefreshManager()
 
     var body: some Scene {
@@ -21,7 +21,7 @@ struct RefreshDisplayApp: App {
             SettingsView()
         }
 
-        MenuBarExtra("RefreshDisplay", systemImage: "display.2") {
+        MenuBarExtra("PixelPulse", systemImage: "display.2") {
             Text(manager.currentModeDescription)
                 .font(.caption)
 
@@ -32,6 +32,21 @@ struct RefreshDisplayApp: App {
             }
             .keyboardShortcut("r", modifiers: .command)
             .disabled(manager.status == .switching)
+
+            Divider()
+
+            Menu("Switch via...") {
+                ForEach(manager.modesGroupedByResolution, id: \.resolution) { group in
+                    Section(group.resolution.label) {
+                        ForEach(group.modes) { mode in
+                            Button(String(format: "%.0f Hz", mode.refreshRate)) {
+                                manager.performRefreshWith(targetModeOption: mode)
+                            }
+                            .disabled(manager.status == .switching)
+                        }
+                    }
+                }
+            }
 
             if manager.status == .switching {
                 Text("Switching...")

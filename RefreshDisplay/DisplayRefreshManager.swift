@@ -41,6 +41,32 @@ struct DisplayInfo: Identifiable, Hashable {
     let isMain: Bool
 }
 
+struct Resolution: Hashable, Comparable {
+    let width: Int
+    let height: Int
+
+    var label: String { "\(width) x \(height)" }
+
+    static func < (lhs: Resolution, rhs: Resolution) -> Bool {
+        if lhs.width != rhs.width { return lhs.width > rhs.width }
+        return lhs.height > rhs.height
+    }
+}
+
+struct ModeOption: Identifiable, Hashable {
+    let id: Int32
+    let width: Int
+    let height: Int
+    let refreshRate: Double
+    let mode: CGDisplayMode
+
+    var resolution: Resolution { Resolution(width: width, height: height) }
+    var label: String { String(format: "%d x %d @ %.0f Hz", width, height, refreshRate) }
+
+    static func == (lhs: ModeOption, rhs: ModeOption) -> Bool { lhs.id == rhs.id }
+    func hash(into hasher: inout Hasher) { hasher.combine(id) }
+}
+
 @Observable
 final class DisplayRefreshManager {
     var status: RefreshStatus = .ready
@@ -49,7 +75,37 @@ final class DisplayRefreshManager {
     var selectedDisplayID: CGDirectDisplayID = CGMainDisplayID()
     var currentModeDescription: String = "—"
 
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "RefreshDisplay", category: "DisplayMode")
+    var allModeOptions: [ModeOption] = []
+    var selectedResolution: Resolution?
+    var selectedRefreshRate: Double?
+
+    var availableResolutions: [Resolution] {
+        Array(Set(allModeOptions.map(\.resolution))).sorted()
+    }
+
+    var availableRefreshRates: [Double] {
+        guard let res = selectedResolution else { return [] }
+        return allModeOptions
+            .filter { $0.resolution == res }
+            .map(\.refreshRate)
+            .uniqueSorted()
+    }
+
+    var selectedTargetMode: ModeOption? {
+        guard let res = selectedResolution, let rate = selectedRefreshRate else { return nil }
+        return allModeOptions.first {
+            $0.resolution == res && $0.refreshRate == rate
+        }
+    }
+
+    var modesGroupedByResolution: [(resolution: Resolution, modes: [ModeOption])] {
+        let grouped = Dictionary(grouping: allModeOptions, by: \.resolution)
+        return grouped.keys.sorted().map { res in
+            (resolution: res, modes: grouped[res]!.sorted { $0.refreshRate > $1.refreshRate })
+        }
+    }
+
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "PixelPulse", category: "DisplayMode")
 
     func refreshDisplayList() {
         var displayCount: UInt32 = 0
@@ -71,6 +127,48 @@ final class DisplayRefreshManager {
         for display in displays {
             appendLog("  \(display.name)\(display.isMain ? " (main)" : "")")
         }
+
+        reloadModes()
+    }
+
+    func reloadModes() {
+        guard let rawModes = CGDisplayCopyAllDisplayModes(selectedDisplayID, nil) as? [CGDisplayMode] else {
+            allModeOptions = []
+            return
+        }
+
+        allModeOptions = rawModes
+            .filter { $0.refreshRate > 0 }
+            .map { ModeOption(id: $0.ioDisplayModeID, width: $0.width, height: $0.height, refreshRate: $0.refreshRate, mode: $0) }
+
+        // Deduplicate by resolution + refresh rate, keeping first
+        var seen = Set<String>()
+        allModeOptions = allModeOptions.filter { mode in
+            let key = "\(mode.width)x\(mode.height)@\(mode.refreshRate)"
+            return seen.insert(key).inserted
+        }
+
+        allModeOptions.sort { a, b in
+            if a.width != b.width { return a.width > b.width }
+            if a.height != b.height { return a.height > b.height }
+            return a.refreshRate > b.refreshRate
+        }
+
+        // Default selection: pick current resolution, and a different refresh rate
+        if let current = CGDisplayCopyDisplayMode(selectedDisplayID) {
+            let currentRes = Resolution(width: current.width, height: current.height)
+            selectedResolution = currentRes
+
+            let ratesAtRes = allModeOptions
+                .filter { $0.resolution == currentRes && $0.refreshRate != current.refreshRate }
+                .map(\.refreshRate)
+
+            selectedRefreshRate = ratesAtRes.first
+                ?? allModeOptions.first(where: { $0.resolution == currentRes })?.refreshRate
+        } else {
+            selectedResolution = availableResolutions.first
+            selectedRefreshRate = availableRefreshRates.first
+        }
     }
 
     func updateCurrentModeDescription() {
@@ -85,6 +183,10 @@ final class DisplayRefreshManager {
     }
 
     func performRefresh() {
+        performRefreshWith(targetModeOption: selectedTargetMode)
+    }
+
+    func performRefreshWith(targetModeOption: ModeOption?) {
         Task { @MainActor in
             status = .switching
             logEntries = []
@@ -97,24 +199,27 @@ final class DisplayRefreshManager {
 
             appendLog("Current: \(modeString(currentMode))")
 
-            guard let allModes = CGDisplayCopyAllDisplayModes(display, nil) as? [CGDisplayMode],
-                  allModes.count > 1 else {
-                fail("Not enough display modes available")
-                return
-            }
-
-            appendLog("Found \(allModes.count) available modes")
-
-            guard let targetMode = selectTargetMode(current: currentMode, allModes: allModes) else {
-                fail("Could not find a suitable alternate display mode")
-                return
+            let targetMode: CGDisplayMode
+            if let selected = targetModeOption {
+                targetMode = selected.mode
+                appendLog("Using selected target: \(selected.label)")
+            } else {
+                guard let allModes = CGDisplayCopyAllDisplayModes(display, nil) as? [CGDisplayMode],
+                      allModes.count > 1 else {
+                    fail("Not enough display modes available")
+                    return
+                }
+                guard let auto = selectTargetMode(current: currentMode, allModes: allModes) else {
+                    fail("Could not find a suitable alternate display mode")
+                    return
+                }
+                targetMode = auto
             }
 
             appendLog("Target: \(modeString(targetMode))")
 
             appendLog("Switching to alternate mode...")
-            let switchResult = setDisplayMode(display: display, mode: targetMode)
-            guard switchResult else {
+            guard setDisplayMode(display: display, mode: targetMode) else {
                 fail("Failed to switch to alternate mode")
                 return
             }
@@ -124,8 +229,7 @@ final class DisplayRefreshManager {
             try? await Task.sleep(for: .seconds(2))
 
             appendLog("Restoring original mode...")
-            let restoreResult = setDisplayMode(display: display, mode: currentMode)
-            guard restoreResult else {
+            guard setDisplayMode(display: display, mode: currentMode) else {
                 fail("Failed to restore original mode")
                 return
             }
@@ -161,7 +265,7 @@ final class DisplayRefreshManager {
             $0.refreshRate > 0
         }
         if let mode = sameResDiffRate {
-            appendLog("Selected mode: same resolution, different refresh rate")
+            appendLog("Auto-selected: same resolution, different refresh rate")
             return mode
         }
 
@@ -170,7 +274,7 @@ final class DisplayRefreshManager {
             $0.refreshRate > 0
         }
         if let mode = diffRate {
-            appendLog("Selected mode: different resolution and refresh rate (fallback)")
+            appendLog("Auto-selected: different resolution and refresh rate (fallback)")
             return mode
         }
 
@@ -178,7 +282,7 @@ final class DisplayRefreshManager {
             $0.ioDisplayModeID != current.ioDisplayModeID
         }
         if let mode = anyDifferent {
-            appendLog("Selected mode: any different mode (last resort)")
+            appendLog("Auto-selected: any different mode (last resort)")
             return mode
         }
 
@@ -225,5 +329,11 @@ final class DisplayRefreshManager {
         logger.error("\(message)")
         appendLog("ERROR: \(message)")
         status = .error(message)
+    }
+}
+
+private extension Array where Element == Double {
+    func uniqueSorted() -> [Double] {
+        Array(Set(self)).sorted(by: >)
     }
 }
