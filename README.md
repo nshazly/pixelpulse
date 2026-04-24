@@ -46,7 +46,7 @@ Download the latest `.dmg` from the [Releases](../../releases) page and drag Pix
    ```bash
    git clone https://github.com/nshazly/pixelpulse.git
    ```
-2. Open `RefreshDisplay.xcodeproj` in Xcode
+2. Open `PixelPulse.xcodeproj` in Xcode
 3. Build and run (Cmd+R)
 
 ## Usage

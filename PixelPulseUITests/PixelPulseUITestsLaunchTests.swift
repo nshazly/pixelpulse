@@ -1,13 +1,13 @@
 //
-//  RefreshDisplayUITestsLaunchTests.swift
-//  RefreshDisplayUITests
+//  PixelPulseUITestsLaunchTests.swift
+//  PixelPulseUITests
 //
 //  Created by Neill Shazly on 2026-03-23.
 //
 
 import XCTest
 
-final class RefreshDisplayUITestsLaunchTests: XCTestCase {
+final class PixelPulseUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

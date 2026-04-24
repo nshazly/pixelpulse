@@ -1,14 +1,14 @@
 //
-//  RefreshDisplayTests.swift
-//  RefreshDisplayTests
+//  PixelPulseTests.swift
+//  PixelPulseTests
 //
 //  Created by Neill Shazly on 2026-03-23.
 //
 
 import Testing
-@testable import RefreshDisplay
+@testable import PixelPulse
 
-struct RefreshDisplayTests {
+struct PixelPulseTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.

@@ -12,39 +12,39 @@
 			containerPortal = D295AA1F2F71E0AE00B1B4B7 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D295AA262F71E0AE00B1B4B7;
-			remoteInfo = RefreshDisplay;
+			remoteInfo = PixelPulse;
 		};
 		D295AA3F2F71E0AF00B1B4B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D295AA1F2F71E0AE00B1B4B7 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D295AA262F71E0AE00B1B4B7;
-			remoteInfo = RefreshDisplay;
+			remoteInfo = PixelPulse;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D26ECFC52F9B412D0007D4E5 /* generate_icon_concept2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generate_icon_concept2.swift; sourceTree = "<group>"; };
 		D26ECFC62F9B413F0007D4E5 /* generate_icon_concept3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generate_icon_concept3.swift; sourceTree = "<group>"; };
-		D295AA272F71E0AE00B1B4B7 /* RefreshDisplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RefreshDisplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D295AA342F71E0AF00B1B4B7 /* RefreshDisplayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RefreshDisplayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D295AA3E2F71E0AF00B1B4B7 /* RefreshDisplayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RefreshDisplayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295AA272F71E0AE00B1B4B7 /* PixelPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295AA342F71E0AF00B1B4B7 /* PixelPulseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PixelPulseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295AA3E2F71E0AF00B1B4B7 /* PixelPulseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PixelPulseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D295AA292F71E0AE00B1B4B7 /* RefreshDisplay */ = {
+		D295AA292F71E0AE00B1B4B7 /* PixelPulse */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RefreshDisplay;
+			path = PixelPulse;
 			sourceTree = "<group>";
 		};
-		D295AA372F71E0AF00B1B4B7 /* RefreshDisplayTests */ = {
+		D295AA372F71E0AF00B1B4B7 /* PixelPulseTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RefreshDisplayTests;
+			path = PixelPulseTests;
 			sourceTree = "<group>";
 		};
-		D295AA412F71E0AF00B1B4B7 /* RefreshDisplayUITests */ = {
+		D295AA412F71E0AF00B1B4B7 /* PixelPulseUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RefreshDisplayUITests;
+			path = PixelPulseUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -94,9 +94,9 @@
 		D295AA1E2F71E0AE00B1B4B7 = {
 			isa = PBXGroup;
 			children = (
-				D295AA292F71E0AE00B1B4B7 /* RefreshDisplay */,
-				D295AA372F71E0AF00B1B4B7 /* RefreshDisplayTests */,
-				D295AA412F71E0AF00B1B4B7 /* RefreshDisplayUITests */,
+				D295AA292F71E0AE00B1B4B7 /* PixelPulse */,
+				D295AA372F71E0AF00B1B4B7 /* PixelPulseTests */,
+				D295AA412F71E0AF00B1B4B7 /* PixelPulseUITests */,
 				D295AA282F71E0AE00B1B4B7 /* Products */,
 				D26ECFC32F9B41090007D4E5 /* Resources */,
 			);
@@ -105,9 +105,9 @@
 		D295AA282F71E0AE00B1B4B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D295AA272F71E0AE00B1B4B7 /* RefreshDisplay.app */,
-				D295AA342F71E0AF00B1B4B7 /* RefreshDisplayTests.xctest */,
-				D295AA3E2F71E0AF00B1B4B7 /* RefreshDisplayUITests.xctest */,
+				D295AA272F71E0AE00B1B4B7 /* PixelPulse.app */,
+				D295AA342F71E0AF00B1B4B7 /* PixelPulseTests.xctest */,
+				D295AA3E2F71E0AF00B1B4B7 /* PixelPulseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,9 +115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D295AA262F71E0AE00B1B4B7 /* RefreshDisplay */ = {
+		D295AA262F71E0AE00B1B4B7 /* PixelPulse */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D295AA482F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "RefreshDisplay" */;
+			buildConfigurationList = D295AA482F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "PixelPulse" */;
 			buildPhases = (
 				D295AA232F71E0AE00B1B4B7 /* Sources */,
 				D295AA242F71E0AE00B1B4B7 /* Frameworks */,
@@ -128,18 +128,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				D295AA292F71E0AE00B1B4B7 /* RefreshDisplay */,
+				D295AA292F71E0AE00B1B4B7 /* PixelPulse */,
 			);
-			name = RefreshDisplay;
+			name = PixelPulse;
 			packageProductDependencies = (
 			);
-			productName = RefreshDisplay;
-			productReference = D295AA272F71E0AE00B1B4B7 /* RefreshDisplay.app */;
+			productName = PixelPulse;
+			productReference = D295AA272F71E0AE00B1B4B7 /* PixelPulse.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D295AA332F71E0AF00B1B4B7 /* RefreshDisplayTests */ = {
+		D295AA332F71E0AF00B1B4B7 /* PixelPulseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D295AA4B2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "RefreshDisplayTests" */;
+			buildConfigurationList = D295AA4B2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "PixelPulseTests" */;
 			buildPhases = (
 				D295AA302F71E0AF00B1B4B7 /* Sources */,
 				D295AA312F71E0AF00B1B4B7 /* Frameworks */,
@@ -151,18 +151,18 @@
 				D295AA362F71E0AF00B1B4B7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				D295AA372F71E0AF00B1B4B7 /* RefreshDisplayTests */,
+				D295AA372F71E0AF00B1B4B7 /* PixelPulseTests */,
 			);
-			name = RefreshDisplayTests;
+			name = PixelPulseTests;
 			packageProductDependencies = (
 			);
-			productName = RefreshDisplayTests;
-			productReference = D295AA342F71E0AF00B1B4B7 /* RefreshDisplayTests.xctest */;
+			productName = PixelPulseTests;
+			productReference = D295AA342F71E0AF00B1B4B7 /* PixelPulseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D295AA3D2F71E0AF00B1B4B7 /* RefreshDisplayUITests */ = {
+		D295AA3D2F71E0AF00B1B4B7 /* PixelPulseUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D295AA4E2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "RefreshDisplayUITests" */;
+			buildConfigurationList = D295AA4E2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "PixelPulseUITests" */;
 			buildPhases = (
 				D295AA3A2F71E0AF00B1B4B7 /* Sources */,
 				D295AA3B2F71E0AF00B1B4B7 /* Frameworks */,
@@ -174,13 +174,13 @@
 				D295AA402F71E0AF00B1B4B7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				D295AA412F71E0AF00B1B4B7 /* RefreshDisplayUITests */,
+				D295AA412F71E0AF00B1B4B7 /* PixelPulseUITests */,
 			);
-			name = RefreshDisplayUITests;
+			name = PixelPulseUITests;
 			packageProductDependencies = (
 			);
-			productName = RefreshDisplayUITests;
-			productReference = D295AA3E2F71E0AF00B1B4B7 /* RefreshDisplayUITests.xctest */;
+			productName = PixelPulseUITests;
+			productReference = D295AA3E2F71E0AF00B1B4B7 /* PixelPulseUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D295AA222F71E0AE00B1B4B7 /* Build configuration list for PBXProject "RefreshDisplay" */;
+			buildConfigurationList = D295AA222F71E0AE00B1B4B7 /* Build configuration list for PBXProject "PixelPulse" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -220,9 +220,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D295AA262F71E0AE00B1B4B7 /* RefreshDisplay */,
-				D295AA332F71E0AF00B1B4B7 /* RefreshDisplayTests */,
-				D295AA3D2F71E0AF00B1B4B7 /* RefreshDisplayUITests */,
+				D295AA262F71E0AE00B1B4B7 /* PixelPulse */,
+				D295AA332F71E0AF00B1B4B7 /* PixelPulseTests */,
+				D295AA3D2F71E0AF00B1B4B7 /* PixelPulseUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -278,12 +278,12 @@
 /* Begin PBXTargetDependency section */
 		D295AA362F71E0AF00B1B4B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D295AA262F71E0AE00B1B4B7 /* RefreshDisplay */;
+			target = D295AA262F71E0AE00B1B4B7 /* PixelPulse */;
 			targetProxy = D295AA352F71E0AF00B1B4B7 /* PBXContainerItemProxy */;
 		};
 		D295AA402F71E0AF00B1B4B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D295AA262F71E0AE00B1B4B7 /* RefreshDisplay */;
+			target = D295AA262F71E0AE00B1B4B7 /* PixelPulse */;
 			targetProxy = D295AA3F2F71E0AF00B1B4B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,7 +430,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.RefreshDisplay;
+				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.PixelPulse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -461,7 +461,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.RefreshDisplay;
+				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.PixelPulse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -483,14 +483,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.RefreshDisplayTests;
+				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.PixelPulseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RefreshDisplay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RefreshDisplay";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PixelPulse.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PixelPulse";
 			};
 			name = Debug;
 		};
@@ -504,14 +504,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.RefreshDisplayTests;
+				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.PixelPulseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RefreshDisplay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RefreshDisplay";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PixelPulse.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PixelPulse";
 			};
 			name = Release;
 		};
@@ -523,14 +523,14 @@
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.RefreshDisplayUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.PixelPulseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = RefreshDisplay;
+				TEST_TARGET_NAME = PixelPulse;
 			};
 			name = Debug;
 		};
@@ -542,21 +542,21 @@
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.RefreshDisplayUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = tickledbits.PixelPulseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = RefreshDisplay;
+				TEST_TARGET_NAME = PixelPulse;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D295AA222F71E0AE00B1B4B7 /* Build configuration list for PBXProject "RefreshDisplay" */ = {
+		D295AA222F71E0AE00B1B4B7 /* Build configuration list for PBXProject "PixelPulse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D295AA462F71E0AF00B1B4B7 /* Debug */,
@@ -565,7 +565,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D295AA482F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "RefreshDisplay" */ = {
+		D295AA482F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "PixelPulse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D295AA492F71E0AF00B1B4B7 /* Debug */,
@@ -574,7 +574,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D295AA4B2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "RefreshDisplayTests" */ = {
+		D295AA4B2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "PixelPulseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D295AA4C2F71E0AF00B1B4B7 /* Debug */,
@@ -583,7 +583,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D295AA4E2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "RefreshDisplayUITests" */ = {
+		D295AA4E2F71E0AF00B1B4B7 /* Build configuration list for PBXNativeTarget "PixelPulseUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D295AA4F2F71E0AF00B1B4B7 /* Debug */,
