@@ -1,5 +1,11 @@
 # PixelPulse
 
+[![CI](https://github.com/nshazly/pixelpulse/actions/workflows/ci.yml/badge.svg)](https://github.com/nshazly/pixelpulse/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/nshazly/pixelpulse)](https://github.com/nshazly/pixelpulse/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform: macOS 14.0+](https://img.shields.io/badge/macOS-14.0%2B-brightgreen)](https://developer.apple.com/macos/)
+[![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg)](https://swift.org/)
+
 A lightweight macOS utility that fixes the Samsung Odyssey G9 refresh rate synchronization bug by programmatically toggling display modes.
 
 ## The Problem
