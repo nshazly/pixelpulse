@@ -2,7 +2,7 @@
 
 ## Overview
 
-[Context7](https://context7.com) provides up-to-date library documentation directly in the terminal via `npx ctx7@latest`. It is configured as a Claude Code rule (`.claude/rules/context7.md`) so the AI assistant automatically fetches current docs when answering questions about frameworks and libraries.
+[Context7](https://context7.com) provides up-to-date library documentation directly in the terminal via `npx ctx7@latest`. It is an **opt-in, manual tool** — invoke it on demand whenever you need current API documentation while working on this project.
 
 ## How It Works
 
@@ -15,9 +15,9 @@
    npx ctx7@latest docs <libraryId> "<question>"
    ```
 
-## When It's Used
+## When to Use It
 
-Context7 is invoked automatically by Claude Code whenever you ask about:
+Invoke Context7 manually when you need accurate, up-to-date docs for:
 - SwiftUI APIs, view modifiers, or lifecycle
 - Core Graphics / AppKit display APIs
 - ServiceManagement (launch-at-login)
@@ -31,9 +31,9 @@ Training data for AI models can be months behind the latest SDK releases. Contex
 - macOS SDK deprecations and replacements
 - New frameworks (e.g., FoundationModels, Liquid Glass design system)
 
-## Configuration
+## Setup
 
-The rule lives at `.claude/rules/context7.md` and is automatically loaded by Claude Code. No project-level setup is needed beyond having `npx` available (ships with Node.js).
+No project-level configuration is required. You only need `npx` available (ships with Node.js). Run commands on demand from the project root whenever you need up-to-date documentation.
 
 ## Rate Limits
 
