@@ -18,7 +18,7 @@ struct PixelPulseApp: App {
         .windowResizability(.contentSize)
 
         Settings {
-            SettingsView()
+            SettingsView(manager: manager)
         }
 
         MenuBarExtra("PixelPulse", systemImage: "display.2") {

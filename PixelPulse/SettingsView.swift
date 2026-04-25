@@ -9,6 +9,7 @@ import SwiftUI
 import ServiceManagement
 
 struct SettingsView: View {
+    @Bindable var manager: DisplayRefreshManager
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
 
     var body: some View {
@@ -25,12 +26,18 @@ struct SettingsView: View {
                         launchAtLogin = SMAppService.mainApp.status == .enabled
                     }
                 }
+
+            Toggle("Variable Refresh Rate", isOn: $manager.showVariableRefreshRate)
+                .help("Show variable refresh rate labels for displays that report dynamic rates (e.g. ProMotion)")
+
+            Toggle("Show All Resolutions", isOn: $manager.showAllResolutions)
+                .help("Include non-Retina and low-resolution display modes beyond the standard scaled options")
         }
         .formStyle(.grouped)
-        .frame(width: 320, height: 100)
+        .frame(width: 320, height: 180)
     }
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(manager: DisplayRefreshManager())
 }

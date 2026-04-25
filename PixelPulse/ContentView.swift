@@ -118,11 +118,12 @@ struct ContentView: View {
                     Spacer()
                     Picker("", selection: $manager.selectedResolution) {
                         ForEach(manager.availableResolutions, id: \.self) { res in
-                            Text(res.label).tag(Optional(res))
+                            Text(manager.resolutionLabel(for: res))
+                                .tag(Optional(res))
                         }
                     }
                     .labelsHidden()
-                    .frame(maxWidth: 180)
+                    .frame(maxWidth: 260)
                 }
 
                 HStack {
@@ -131,7 +132,7 @@ struct ContentView: View {
                     Spacer()
                     Picker("", selection: $manager.selectedRefreshRate) {
                         ForEach(manager.availableRefreshRates, id: \.self) { rate in
-                            Text(String(format: "%.0f Hz", rate)).tag(Optional(rate))
+                            Text(manager.refreshRateLabel(for: rate)).tag(Optional(rate))
                         }
                     }
                     .labelsHidden()
