@@ -1,5 +1,11 @@
 # PixelPulse
 
+[![CI](https://github.com/nshazly/pixelpulse/actions/workflows/ci.yml/badge.svg)](https://github.com/nshazly/pixelpulse/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/nshazly/pixelpulse)](https://github.com/nshazly/pixelpulse/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform: macOS 14.0+](https://img.shields.io/badge/macOS-14.0%2B-brightgreen)](https://developer.apple.com/macos/)
+[![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg)](https://swift.org/)
+
 A lightweight macOS utility that fixes the Samsung Odyssey G9 refresh rate synchronization bug by programmatically toggling display modes.
 
 ## The Problem
@@ -24,9 +30,13 @@ You can also manually select the intermediate resolution and refresh rate from t
 - **One-click refresh** — Fix your display with a single button press or keyboard shortcut (Cmd+R)
 - **Selectable target mode** — Choose the intermediate resolution and refresh rate, or let the app pick automatically
 - **Multi-display support** — Detects all connected displays and lets you choose which to refresh
+- **Laptop display support** — Works on built-in Retina displays that report variable refresh rates (ProMotion, etc.)
+- **macOS-style resolution labels** — Resolutions are labeled as "Larger Text", "Default", or "More Space" on Retina displays, with the current resolution marked
+- **Variable Refresh Rate mode** — Toggle in Settings to show variable rate labels for displays with dynamic refresh (e.g. ProMotion)
+- **Show All Resolutions** — Toggle in Settings to reveal non-Retina and low-resolution modes beyond the standard scaled options
 - **Menu bar access** — Quick refresh from the macOS menu bar, with a "Switch via..." submenu listing all available modes grouped by resolution
 - **Launch at login** — Optionally start the app automatically when you log in (Settings > Launch at Login)
-- **Smart mode selection** — Automatically picks the best alternate display mode for the toggle
+- **Smart mode selection** — Automatically picks the best alternate display mode for the toggle, defaulting to the current resolution at a different refresh rate
 - **Detailed logging** — See exactly what the app is doing in the built-in log viewer
 
 ## Requirements
@@ -46,7 +56,7 @@ Download the latest `.dmg` from the [Releases](../../releases) page and drag Pix
    ```bash
    git clone https://github.com/nshazly/pixelpulse.git
    ```
-2. Open `RefreshDisplay.xcodeproj` in Xcode
+2. Open `PixelPulse.xcodeproj` in Xcode
 3. Build and run (Cmd+R)
 
 ## Usage

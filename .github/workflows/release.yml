@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    tags: [ "v*" ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
+
+      - name: Run Tests
+        run: |
+          xcodebuild test \
+            -project PixelPulse.xcodeproj \
+            -scheme PixelPulse \
+            -destination 'platform=macOS' \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+  build-and-release:
+    name: Build DMG & Release
+    runs-on: macos-15
+    needs: test
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
+
+      - name: Build Release
+        run: |
+          xcodebuild build \
+            -project PixelPulse.xcodeproj \
+            -scheme PixelPulse \
+            -configuration Release \
+            -derivedDataPath build \
+            -destination 'platform=macOS' \
+            CODE_SIGN_IDENTITY="-" \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Create DMG
+        run: |
+          APP_PATH=$(find build/Build/Products/Release -name "PixelPulse.app" -type d | head -1)
+          DMG_DIR="dmg_staging"
+          mkdir -p "$DMG_DIR"
+          cp -R "$APP_PATH" "$DMG_DIR/"
+          ln -s /Applications "$DMG_DIR/Applications"
+          hdiutil create \
+            -volname "PixelPulse" \
+            -srcfolder "$DMG_DIR" \
+            -ov \
+            -format UDZO \
+            "PixelPulse-${GITHUB_REF_NAME}.dmg"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: PixelPulse-*.dmg
+          generate_release_notes: true
+          body: |
+            ## Installation
+
+            Download **PixelPulse-${{ github.ref_name }}.dmg**, open it, and drag PixelPulse to your Applications folder.
+
+            Requires macOS 14.0 (Sonoma) or later.
+
+            ## What's in this release
