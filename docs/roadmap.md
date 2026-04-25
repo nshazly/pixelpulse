@@ -2,14 +2,17 @@
 
 ## Current State (v1.0)
 
-PixelPulse is a macOS menu bar utility that fixes Samsung Odyssey G9 refresh rate desync by toggling display modes via Core Graphics APIs. It supports multi-display selection, manual target mode picking, launch-at-login, and a built-in log viewer.
+PixelPulse is a macOS menu bar utility that fixes Samsung Odyssey G9 refresh rate desync by toggling display modes via Core Graphics APIs. It supports multi-display selection, manual target mode picking, launch-at-login, and a built-in log viewer. It also works on laptop built-in displays with variable refresh rates, and provides macOS-style resolution labels (Larger Text / Default / More Space) on Retina displays.
 
 ## Phase 1: Testing & Quality
 
 ### Unit Tests
-- [ ] `DisplayRefreshManager` logic tests (mode selection, resolution grouping, deduplication)
-- [ ] `RefreshStatus` state machine validation
-- [ ] `ModeOption` and `Resolution` model tests (equality, hashing, sorting, labels)
+- [x] `DisplayRefreshManager` logic tests (mode selection, resolution grouping, deduplication)
+- [x] `RefreshStatus` state machine validation
+- [x] `ModeOption` and `Resolution` model tests (equality, hashing, sorting, labels)
+- [x] Resolution label tests (Retina scale descriptions, current marker)
+- [x] Refresh rate label tests (default and VRR mode)
+- [x] HiDPI detection and Show All Resolutions toggle behavior
 - [ ] Error path coverage (no displays, single mode, CGDisplay API failures)
 
 ### UI Tests
@@ -26,10 +29,14 @@ PixelPulse is a macOS menu bar utility that fixes Samsung Odyssey G9 refresh rat
 
 ## Phase 2: Automated Installation & Distribution
 
+### DMG Distribution
+- [x] Automated `.dmg` build artifact creation in CI
+- [x] GitHub Release publishing with DMG attachment (on `v*` tags)
+- [x] Auto-generated release notes with categorized changelog
+- [ ] Code-sign and notarize the app for Gatekeeper
+
 ### Homebrew Cask
 - [ ] Create Homebrew Cask formula for `pixelpulse`
-- [ ] Automate `.dmg` or `.zip` build artifact creation in CI
-- [ ] Code-sign and notarize the app for Gatekeeper
 - [ ] Publish tap or submit to homebrew-cask
 
 ### Sparkle (Auto-Updates)
@@ -43,13 +50,14 @@ PixelPulse is a macOS menu bar utility that fixes Samsung Odyssey G9 refresh rat
 ## Phase 3: CI/CD Pipeline
 
 ### GitHub Actions
-- [ ] Build workflow: compile on every push and PR (`xcodebuild build`)
-- [ ] Test workflow: run unit and UI test suites (`xcodebuild test`)
+- [x] Build workflow: compile on every push and PR
+- [x] Test workflow: run unit and UI test suites (`xcodebuild test`)
+- [x] Release workflow: on tag push, build `.dmg`, create GitHub Release with artifact
 - [ ] Lint workflow: SwiftLint checks on changed files
-- [ ] Release workflow: on tag push, build signed `.dmg`, notarize, create GitHub Release with artifact
+- [ ] Notarization step in release workflow
 
 ### Code Quality Gates
-- [ ] Require passing tests before merge
+- [ ] Require passing tests before merge (branch protection rule)
 - [ ] Require SwiftLint pass (no errors)
 - [ ] Optional: code coverage reporting via Codecov or similar
 

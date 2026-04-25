@@ -30,9 +30,13 @@ You can also manually select the intermediate resolution and refresh rate from t
 - **One-click refresh** — Fix your display with a single button press or keyboard shortcut (Cmd+R)
 - **Selectable target mode** — Choose the intermediate resolution and refresh rate, or let the app pick automatically
 - **Multi-display support** — Detects all connected displays and lets you choose which to refresh
+- **Laptop display support** — Works on built-in Retina displays that report variable refresh rates (ProMotion, etc.)
+- **macOS-style resolution labels** — Resolutions are labeled as "Larger Text", "Default", or "More Space" on Retina displays, with the current resolution marked
+- **Variable Refresh Rate mode** — Toggle in Settings to show variable rate labels for displays with dynamic refresh (e.g. ProMotion)
+- **Show All Resolutions** — Toggle in Settings to reveal non-Retina and low-resolution modes beyond the standard scaled options
 - **Menu bar access** — Quick refresh from the macOS menu bar, with a "Switch via..." submenu listing all available modes grouped by resolution
 - **Launch at login** — Optionally start the app automatically when you log in (Settings > Launch at Login)
-- **Smart mode selection** — Automatically picks the best alternate display mode for the toggle
+- **Smart mode selection** — Automatically picks the best alternate display mode for the toggle, defaulting to the current resolution at a different refresh rate
 - **Detailed logging** — See exactly what the app is doing in the built-in log viewer
 
 ## Requirements

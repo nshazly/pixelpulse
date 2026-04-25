@@ -26,9 +26,9 @@ Or open `PixelPulse.xcodeproj` in Xcode and press Cmd+R.
 
 ## Architecture
 
-Single `@Observable` class (`DisplayRefreshManager`) owns all state: display list, mode options, refresh status, and log entries. SwiftUI views bind to it directly. The app entry point (`PixelPulseApp`) provides a `WindowGroup`, `Settings` scene, and `MenuBarExtra`.
+Single `@Observable` class (`DisplayRefreshManager`) owns all state: display list, mode options, refresh status, log entries, and user preferences (`showVariableRefreshRate`, `showAllResolutions` via UserDefaults). SwiftUI views bind to it directly. The app entry point (`PixelPulseApp`) provides a `WindowGroup`, `Settings` scene, and `MenuBarExtra`, passing the manager to all scenes.
 
-Core Graphics APIs used: `CGDisplayCopyAllDisplayModes`, `CGConfigureDisplayWithDisplayMode`, `CGBeginDisplayConfiguration`, `CGCompleteDisplayConfiguration`.
+Core Graphics APIs used: `CGDisplayCopyAllDisplayModes` (with `kCGDisplayShowDuplicateLowResolutionModes`), `CGConfigureDisplayWithDisplayMode`, `CGBeginDisplayConfiguration`, `CGCompleteDisplayConfiguration`. Falls back to `NSScreen.maximumFramesPerSecond` when `CGDisplayMode.refreshRate` reports 0 (common on laptop built-in displays with variable refresh rates).
 
 ## Code Style
 
@@ -38,10 +38,17 @@ Core Graphics APIs used: `CGDisplayCopyAllDisplayModes`, `CGConfigureDisplayWith
 - Minimal comments — only for non-obvious behavior
 - See `docs/standards.md` for full conventions
 
+## CI/CD
+
+- `ci.yml` — Runs tests on push to `main` and PRs targeting `main` (macOS 15 runner, Xcode 16)
+- `release.yml` — On `v*` tags: runs tests, builds Release DMG, publishes to GitHub Releases
+- Release notes auto-generated from commits/PRs via `.github/release.yml` categories
+
 ## Key Constraints
 
 - The app requires macOS display configuration permissions — CG APIs will fail in a sandboxed environment without entitlements
-- Tests that exercise `CGDisplayCopyAllDisplayModes` need a real display or a mock abstraction layer (not yet implemented)
+- Built-in laptop displays report `refreshRate == 0` from CG APIs — the app falls back to `NSScreen.maximumFramesPerSecond`
+- Tests use real display APIs (`CGDisplayCopyAllDisplayModes`, etc.) — CI runners must have a display (macOS GitHub runners have virtual displays)
 - Bundle identifier: `tickledbits.PixelPulse`
 
 ## Git Conventions

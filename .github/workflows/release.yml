@@ -66,3 +66,11 @@ jobs:
         with:
           files: PixelPulse-*.dmg
           generate_release_notes: true
+          body: |
+            ## Installation
+
+            Download **PixelPulse-${{ github.ref_name }}.dmg**, open it, and drag PixelPulse to your Applications folder.
+
+            Requires macOS 14.0 (Sonoma) or later.
+
+            ## What's in this release

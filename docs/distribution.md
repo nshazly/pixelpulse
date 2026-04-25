@@ -175,7 +175,8 @@ end
 
 ## Recommended Rollout Plan
 
-1. **Immediate:** Set up fastlane with `scan` (test) + `gym` (build) + `notarize` lanes, producing a signed and notarized DMG. Distribute via GitHub Releases.
-2. **Short-term:** Add a Homebrew Cask pointing at GitHub Releases for developer convenience.
-3. **Medium-term:** Integrate Sparkle for auto-updates once there is a regular release cadence.
-4. **Long-term:** Investigate a privileged helper architecture (`SMAppService`) to make the app sandbox-compatible for Mac App Store distribution.
+1. **Immediate (done):** CI pipeline with GitHub Actions runs the test suite on every push/PR. Release workflow builds a DMG and publishes to GitHub Releases on `v*` tags. Auto-generated release notes with categorized changelog via `.github/release.yml`.
+2. **Next:** Code-sign with a Developer ID Application certificate and notarize via `xcrun notarytool` (or fastlane `notarize` action) so Gatekeeper shows "identified developer."
+3. **Short-term:** Add a Homebrew Cask pointing at GitHub Releases for developer convenience.
+4. **Medium-term:** Integrate Sparkle for auto-updates once there is a regular release cadence.
+5. **Long-term:** Investigate a privileged helper architecture (`SMAppService`) to make the app sandbox-compatible for Mac App Store distribution.
