@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
+
+      - name: Run Tests
+        run: |
+          xcodebuild test \
+            -project PixelPulse.xcodeproj \
+            -scheme PixelPulse \
+            -destination 'platform=macOS' \
+            -resultBundlePath TestResults.xcresult \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: TestResults.xcresult
+
+  build-dmg:
+    name: Build DMG
+    runs-on: macos-15
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
+
+      - name: Build Release
+        run: |
+          xcodebuild build \
+            -project PixelPulse.xcodeproj \
+            -scheme PixelPulse \
+            -configuration Release \
+            -derivedDataPath build \
+            -destination 'platform=macOS' \
+            CODE_SIGN_IDENTITY="-" \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Locate App Bundle
+        id: locate
+        run: |
+          APP_PATH=$(find build/Build/Products/Release -name "PixelPulse.app" -type d | head -1)
+          echo "app_path=$APP_PATH" >> "$GITHUB_OUTPUT"
+          echo "Found app at: $APP_PATH"
+
+      - name: Create DMG
+        run: |
+          APP_PATH="${{ steps.locate.outputs.app_path }}"
+          DMG_DIR="dmg_staging"
+          mkdir -p "$DMG_DIR"
+          cp -R "$APP_PATH" "$DMG_DIR/"
+          ln -s /Applications "$DMG_DIR/Applications"
+          hdiutil create \
+            -volname "PixelPulse" \
+            -srcfolder "$DMG_DIR" \
+            -ov \
+            -format UDZO \
+            "PixelPulse.dmg"
+
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: PixelPulse-dmg
+          path: PixelPulse.dmg
