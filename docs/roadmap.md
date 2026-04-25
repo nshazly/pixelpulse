@@ -60,6 +60,15 @@ PixelPulse is a macOS menu bar utility that fixes Samsung Odyssey G9 refresh rat
 - [ ] Require passing tests before merge (branch protection rule)
 - [ ] Require SwiftLint pass (no errors)
 - [ ] Optional: code coverage reporting via Codecov or similar
+- [x] Laptop display support — fallback to `NSScreen.maximumFramesPerSecond` when CG reports 0 Hz
+- [x] Variable Refresh Rate setting (persisted to UserDefaults)
+- [x] Show All Resolutions setting with `kCGDisplayShowDuplicateLowResolutionModes`
+- [x] macOS-style resolution labels (Larger Text / Default / More Space) on Retina displays
+- [x] Current resolution indicator in picker dropdown
+- [x] Default mode selection prefers a different refresh rate for quick toggling
+- [x] Distribution guide (`docs/distribution.md`)
+- [x] README badges (CI, release, license, platform, Swift)
+- [x] Deployment target lowered to macOS 14.0
 
 ## Phase 4: Feature Enhancements
 
