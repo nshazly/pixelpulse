@@ -43,6 +43,7 @@ Core Graphics APIs used: `CGDisplayCopyAllDisplayModes` (with `kCGDisplayShowDup
 - `ci.yml` — Runs tests on push to `main` and PRs targeting `main` (macOS 15 runner, Xcode 16)
 - `release.yml` — On `v*` tags: runs tests, builds Release DMG, publishes to GitHub Releases
 - Release notes auto-generated from commits/PRs via `.github/release.yml` categories
+- `scripts/configure-github-repo.sh` — Applies GitHub security settings and rulesets (dry run by default, `--apply` to change). Actions must be SHA-pinned and allow-listed; update `ALLOWED_ACTIONS` / `REQUIRED_CHECKS` in the script when adding third-party actions or renaming CI jobs
 
 ## Key Constraints
 
